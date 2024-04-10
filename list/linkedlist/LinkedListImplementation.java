@@ -23,9 +23,11 @@ public class LinkedListImplementation<T> {
         if (head == null) {
             head = newNode;
         } else {
-            Node<T> temp = head;
-            newNode.setNext(temp);
-            head = newNode;
+            Node<T> current = head;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
         }
         size++;
     }

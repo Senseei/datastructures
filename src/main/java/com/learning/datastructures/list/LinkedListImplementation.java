@@ -94,6 +94,10 @@ public class LinkedListImplementation<T> {
         return size;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

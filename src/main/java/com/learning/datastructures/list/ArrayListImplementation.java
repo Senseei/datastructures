@@ -47,6 +47,14 @@ public class ArrayListImplementation<T>{
         return (T) list[index];
     }
 
+    public int size(){
+        return size;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

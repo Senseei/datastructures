@@ -1,17 +1,17 @@
 package com.learning.datastructures.stack;
 
-import com.learning.datastructures.common.Node;
+import com.learning.datastructures.node.LinkedNode;
 
 public class StackImplementation<T> {
 
-    private Node<T> top;
+    private LinkedNode<T> top;
     private int size;
 
     public void push(T data) {
         if (top == null) {
-            top = new Node<>(data);
+            top = new LinkedNode<>(data);
         } else {
-            Node<T> newNode = new Node<>(data);
+            LinkedNode<T> newNode = new LinkedNode<>(data);
             newNode.setNext(top);
             top = newNode;
         }
@@ -19,9 +19,9 @@ public class StackImplementation<T> {
     }
 
     public T pop() {
-        if (top == null) {
+        if (top == null)
             return null;
-        }
+
         T data = top.getData();
         top = top.getNext();
         size--;

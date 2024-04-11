@@ -1,9 +1,10 @@
 package com.learning.datastructures.list;
 
-public class ArrayListImplementation<T>{
+public class ArrayListImplementation<T> {
     private static final int INITIAL_CAPACITY = 10;
-    private int size = 0;
-    private Object[] list = new Object[INITIAL_CAPACITY];
+    private int size;
+    private Object[] array = new Object[INITIAL_CAPACITY];
+    // lista1
 
     public static void main(String[] args){
         ArrayListImplementation<Integer> list = new ArrayListImplementation<>();
@@ -20,10 +21,10 @@ public class ArrayListImplementation<T>{
     }
 
     public void add(T element){
-        if(size == list.length)
+        if(size == array.length)
             increaseCapacity();
 
-        list[size++] = element;
+        array[size++] = element;
     }
 
     @SuppressWarnings("unchecked")
@@ -31,11 +32,21 @@ public class ArrayListImplementation<T>{
         if(index < 0 || index >= size)
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
-        T element = (T) list[index];
+        T element = (T) array[index];
         for(int i = index; i < size - 1; i++){
-            list[i] = list[i + 1];
+            array[i] = array[i + 1];
         }
         size--;
+
+        if (size < array.length / 2) {
+            int newSize = array.length * (2 / 3);
+            Object[] newArray = new Object[newSize];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
+            }
+            array = newArray;
+        }
+
         return element;
     }
 
@@ -44,7 +55,7 @@ public class ArrayListImplementation<T>{
         if(index < 0 || index >= size)
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
-        return (T) list[index];
+        return (T) array[index];
     }
 
     public int size(){
@@ -60,20 +71,20 @@ public class ArrayListImplementation<T>{
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
         for (int i = 0; i < size - 1; i++) {
-            sb.append(list[i]).append(", ");
+            sb.append(array[i]).append(", ");
         }
-        sb.append(list[size - 1]);
+        sb.append(array[size - 1]);
         sb.append(" ]");
 
         return sb.toString();
     }
 
     private void increaseCapacity(){
-        int newSize = list.length * (3/2);
-        Object[] newList = new Object[newSize];
-        for(int i = 0; i < list.length; i++){
-            newList[i] = list[i];
+        int newSize = array.length * (3/2);
+        Object[] newArray = new Object[newSize];
+        for(int i = 0; i < array.length; i++){
+            newArray[i] = array[i];
         }
-        list = newList;
+        array = newArray;
     }
 }

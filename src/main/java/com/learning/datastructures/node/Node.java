@@ -1,12 +1,10 @@
-package com.learning.datastructures.common;
+package com.learning.datastructures.node;
 
 public class Node<T> {
-    private Object data;
-    private Node<T> next;
+    protected Object data;
 
     public Node(T data) {
         this.data = data;
-        this.next = null;
     }
 
     @SuppressWarnings("unchecked")
@@ -16,14 +14,6 @@ public class Node<T> {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-    public Node<T> getNext() {
-        return next;
-    }
-
-    public void setNext(Node<T> next) {
-        this.next = next;
     }
 
     @Override

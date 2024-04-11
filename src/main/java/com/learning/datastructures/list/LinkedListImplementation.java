@@ -1,9 +1,9 @@
 package com.learning.datastructures.list;
 
-import com.learning.datastructures.common.Node;
+import com.learning.datastructures.node.LinkedNode;
 
 public class LinkedListImplementation<T> {
-    private Node<T> head;
+    private LinkedNode<T> head;
     private int size;
 
     public static void main(String[] args) {
@@ -21,34 +21,41 @@ public class LinkedListImplementation<T> {
     }
 
     public void add(T element) {
-        Node<T> newNode = new Node<>(element);
         if (head == null) {
-            head = newNode;
-        } else {
-            Node<T> current = head;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newNode);
+            head = new LinkedNode<>(element);
+            size++;
+            return;
         }
+
+        add(element, head);
         size++;
     }
 
+    private void add(T element, LinkedNode<T> current) {
+        // Se o proximo for nulo, chegamos ao fim da lista
+        if (current.getNext() == null) {
+            LinkedNode<T> newNode = new LinkedNode<>(element);
+            current.setNext(newNode);
+            return;
+        }
+        add(element, current.getNext());
+    }
+
     public T remove(int index) {
-        if (index < 0 || index >= size || head == null)
+        if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
         if (index == 0) {
             size--;
-            return head.getData();
+            return head != null ? head.getData() : null;
         }
 
-        Node<T> prev = head;
+        LinkedNode<T> prev = head;
         for (int i = 1; i < index; i++) {
             prev = prev.getNext();
         }
 
-        Node<T> current = prev.getNext();
+        LinkedNode<T> current = prev.getNext();
         prev.setNext(current.getNext());
         size--;
         return current.getData();
@@ -64,8 +71,8 @@ public class LinkedListImplementation<T> {
             return true;
         }
 
-        Node<T> prev = head;
-        Node<T> current = head.getNext();
+        LinkedNode<T> prev = head;
+        LinkedNode<T> current = head.getNext();
         while(current != null) {
             if (current.getData().equals(element)) {
                 prev.setNext(current.getNext());
@@ -83,7 +90,7 @@ public class LinkedListImplementation<T> {
         if (index < 0 || index >= size || head == null)
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 
-        Node<T> current = head;
+        LinkedNode<T> current = head;
         for (int i = 0; i < index; i++)
             current = current.getNext();
 
@@ -102,7 +109,7 @@ public class LinkedListImplementation<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
-        Node<T> current = head;
+        LinkedNode<T> current = head;
         while (current.getNext() != null) {
             sb.append(current).append(", ");
             current = current.getNext();

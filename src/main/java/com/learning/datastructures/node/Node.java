@@ -1,15 +1,14 @@
 package com.learning.datastructures.node;
 
-public class Node<T> {
-    protected Object data;
+public abstract class Node<T> {
+    protected T data;
 
-    public Node(T data) {
+    protected Node(T data) {
         this.data = data;
     }
 
-    @SuppressWarnings("unchecked")
     public T getData() {
-        return (T) data;
+        return data;
     }
 
     public void setData(T data) {

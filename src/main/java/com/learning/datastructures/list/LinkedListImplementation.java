@@ -97,6 +97,14 @@ public class LinkedListImplementation<T> {
         return current.getData();
     }
 
+    public boolean contains(T element) {
+        for (LinkedNode<T> n = head; n != null; n = n.getNext()) {
+            if (n.getData().equals(element))
+                return true;
+        }
+        return false;
+    }
+
     public int size() {
         return size;
     }
